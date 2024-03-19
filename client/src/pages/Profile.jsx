@@ -39,7 +39,11 @@ export default function Profile() {
 
   const handleFileUpload = (file) => {
     const storage = getStorage(app);
-    const fileName = new Date().getTime() + file.name;
+    const fileExtension = file.name.split('.').pop();
+    const date = new Date();
+    const formattedDate = `${date.getDate().toString().padStart(2, '0')}${(date.getMonth()+1).toString().padStart(2, '0')}${date.getFullYear().toString().substr(-2)}`;
+    const formattedTime = `${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}`;
+    const fileName = `${currentUser.username}_${formattedDate}_${formattedTime}.${fileExtension}`;
     const storageRef = ref(storage, `Profile/${fileName}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
