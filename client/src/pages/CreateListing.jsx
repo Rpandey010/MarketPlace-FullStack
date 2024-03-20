@@ -64,7 +64,8 @@ export default function CreateListing() {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file.name;
-      const storageRef = ref(storage, `Listing Photos/${fileName}`);
+      const username = currentUser.username; // assuming the username is stored in currentUser object
+      const storageRef = ref(storage, `Listing Photos/${username}/${fileName}`); // use the username as the subfolder name
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
         'state_changed',
