@@ -30,6 +30,11 @@ export default function Profile() {
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
+  // firebase storage
+  // allow read;
+  // allow write: if
+  // request.resource.size < 2 * 1024 * 1024 &&
+  // request.resource.contentType.matches('image/.*')
 
   useEffect(() => {
     if (file) {
@@ -37,13 +42,14 @@ export default function Profile() {
     }
   }, [file]);
 
+
   const handleFileUpload = (file) => {
     const storage = getStorage(app);
     const fileExtension = file.name.split('.').pop();
     const date = new Date();
     const formattedDate = `${date.getDate().toString().padStart(2, '0')}${(date.getMonth()+1).toString().padStart(2, '0')}${date.getFullYear().toString().substr(-2)}`;
     const formattedTime = `${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}`;
-    const fileName = `${currentUser.username}_${formattedDate}_${formattedTime}.${fileExtension}`;
+    const fileName = currentUser.username + '_' + formattedDate + '_' + formattedTime + '.' + fileExtension;
     const storageRef = ref(storage, `Profile/${fileName}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -64,6 +70,7 @@ export default function Profile() {
       }
     );
   };
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -143,7 +150,7 @@ export default function Profile() {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listings/delete/${listingId}`, {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -274,12 +281,14 @@ export default function Profile() {
 
               <div className='flex flex-col item-center'>
                 <button
-                  
+                  onClick={() => handleListingDelete(listing._id)}
                   className='text-red-700 uppercase'
                 >
                   Delete
                 </button>
-               
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button className='text-green-700 uppercase'>Edit</button>
+                </Link>
               </div>
             </div>
           ))}
