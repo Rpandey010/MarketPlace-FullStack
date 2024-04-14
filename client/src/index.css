@@ -5,3 +5,38 @@
 body{
     background-color: rgb(241, 245, 241);
 }
+  
+  .max-container {
+    @apply mx-auto;
+    @apply max-w-[1440px];
+}
+
+.padding-container {
+    @apply px-6 lg:px-20;
+}
+
+@media (min-width: 1440px) {
+    .padding-container {
+        @apply lg:px-20; /* Only lg and above screens get lg:px-20 */
+        @apply px-6; /* Reset padding for 3xl screens */
+    }
+}
+
+@layer base {
+    .active_Link {
+      color: var(--color-secondary);
+      position: relative;
+      flex: 1;
+    }
+  
+    .active_Link::after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-secondary);
+      position: absolute;
+      bottom: -3px;
+      right: 0;
+    }
+  }
+  
