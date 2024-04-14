@@ -7,7 +7,9 @@ function Popular() {
     <section className='bg-primary'>
       <div className='max_padd_container py-12 xl:py-28 xl:w-[88%] mx-auto px-4'>
 
-        <h3 className='text-center' style={{ fontWeight: 'bold', fontSize: '2.5rem', color: '#333' }}>🔥 Check Out Our Popular Products 🔥</h3>
+        {/* <h3 className='text-center' style={{ fontWeight: 'bold', fontSize: '2.5rem', color: '#333' }}>Discover timeless treasures for your home – where every piece has a story.</h3> */}
+        <h3 className='text-center' style={{ fontWeight: 'bold', fontSize: '2.5rem', color: '#333' }}>Discover timeless treasures for your home </h3>
+          <h3 className='text-center' style={{ fontWeight: 'semi-bold', fontSize: '2rem', color: '#333' }}>𓍊𓋼𓍊𓋼𓍊 where every piece has a story 𓍊𓋼𓍊𓋼𓍊</h3>
         <hr className='h-[3px] md:w-1/2 mx-auto bg-gradient-to-l from-transparent via-black to-transparent mb-16' />
 
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6'>
